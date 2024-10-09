@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 import asyncio
 
 # Токен вашего бота
-API_TOKEN = 'YOUR_BOT_TOKEN'
+API_TOKEN = 'токен'
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=API_TOKEN)
