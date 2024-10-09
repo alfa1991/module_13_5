@@ -35,7 +35,20 @@ async def set_age(message: types.Message, state: FSMContext):
     await message.answer('Введите свой возраст:')
     await state.set_state(UserState.age)
 
-# ... остальные обработчики (set_growth, set_weight) остаются без изменений ...
+# Обработчик для ввода роста
+@dp.message_handler(state=UserState.growth)
+async def set_growth(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['growth'] = int(message.text)
+    await message.answer('Введите свой вес (в кг):')
+    await state.set_state(UserState.weight)
+
+
+# Обработчик для ввода веса и расчета калорий
+@dp.message_handler(state=UserState.weight)
+async def set_weight(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['weight'] = int(message.text)
 
 # Запуск бота
 async def main():
